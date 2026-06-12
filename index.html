@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaskManager - aplikacja do zarządzania zadaniami</title>
+  <meta name="description" content="aplikacja Task Management App wykonana na projekt UI." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Panel boczny">
+      <div>
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+          <img src="ikona2.png" alt="" />
+          </span>
+          <div>
+            <p class="eyebrow">Task App</p>
+            <h1>TaskManager</h1>
+          </div>
+        </div>
+
+        <p class="sidebar-copy">
+          Prosty i intuicyjny organizer zadań
+        </p>
+         <h3 class="sidebar-copy2">
+          Dla każdego
+         </h3>
+      </div>
+
+      <section class="card compact-card">
+  <h2 class="settings-title">
+    <span class="settings-icon" aria-hidden="true">⚙</span>
+    Ustawienia
+  </h2>
+
+  <label class="toggle-line">
+    <span>Tryb ciemny</span>
+    <input id="themeToggle" type="checkbox" />
+  </label>
+</section>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Panel zadań</p>
+          <h2>Organizuj zadania bez limitów</h2>
+          <p>Dodawaj, edytuj, filtruj i zapisuj zadania lokalnie w przeglądarce.</p>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Wyszukiwanie zadań">
+        <label class="search">
+          <span class="sr-only">Szukaj zadania</span>
+          <input id="searchInput" type="search" placeholder="Szukaj po tytule, opisie lub tagu..." />
+        </label>
+      </section>
+
+      <section class="task-list-section">
+        <div class="section-heading">
+          <h3>Lista zadań</h3>
+          <div class="section-controls">
+            <select id="sortSelect" aria-label="Sortowanie zadań">
+              <option value="createdDesc">Najnowsze</option>
+              <option value="deadlineAsc">Najbliższy termin</option>
+              <option value="priorityDesc">Najwyższy priorytet</option>
+              <option value="titleAsc">Tytuł A-Z</option>
+            </select>
+            <button id="openAddModal" class="primary">+ Nowe zadanie</button>
+            <p id="resultInfo">0 zadań</p>
+          </div>
+        </div>
+        <div id="taskList" class="task-list" aria-live="polite"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div class="empty-icon">⌁</div>
+          <h3>Brak zadań do wyświetlenia</h3>
+          <p>Dodaj nowe zadanie albo zmień frazę wyszukiwania.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="modal">
+    <form id="taskForm" method="dialog" novalidate>
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Formularz zadania</p>
+          <h3 id="dialogTitle">Dodaj zadanie</h3>
+        </div>
+        <button class="icon-button" type="button" id="closeModal" aria-label="Zamknij">×</button>
+      </div>
+
+      <input type="hidden" id="taskId" />
+      <label>
+        Tytuł zadania *
+        <input id="titleInput" maxlength="80" required placeholder="np. Przygotować prezentację" />
+        <small class="error" id="titleError"></small>
+      </label>
+      <label>
+        Opis
+        <textarea id="descriptionInput" rows="4" maxlength="280" placeholder="Krótki opis celu i kontekstu zadania"></textarea>
+      </label>
+      <div class="form-grid">
+        <label>
+          Termin
+          <input id="deadlineInput" type="date" />
+        </label>
+        <label>
+          Priorytet
+          <select id="priorityInput">
+            <option value="low">Niski</option>
+            <option value="medium" selected>Średni</option>
+            <option value="high">Wysoki</option>
+          </select>
+        </label>
+      </div>
+      <label>
+        Kategoria / tag
+        <input id="tagInput" maxlength="30" placeholder="np. studia, praca, dom" />
+      </label>
+      <div class="modal-actions">
+        <button class="secondary" type="button" id="cancelModal">Anuluj</button>
+        <button class="primary" type="submit">Zapisz zadanie</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
